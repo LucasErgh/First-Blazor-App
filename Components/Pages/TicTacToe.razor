@@ -7,20 +7,47 @@
 
 <table class="table">
     <tbody>
-    @for(int row = 0; row < 3; ++row){
+    @for (int row = 0; row < 3; ++row)
+    {
         <tr>
-        @for(int col = 0; col < 3; ++col){
-                <td>@cells[row,col]</td>
+        @for (int col = 0; col < 3; ++col)
+        {
+            <td>
+                <button class="btn btn-primary" @onclick="(() => editCell(row, col)">
+                    <p>@cells[row, col]</p>
+                </button>
+            </td>
         }
         </tr>
     }
     </tbody>
 </table>
 
-
-@code{
-    private int[,] cells = new int[3,3];
-    private void editCell(int row, int col, int val){
-        cells[row,col] = val;
+<h2>Cell Values</h2>
+@for (int row = 0; row < 3; ++row)
+{
+    @for (int col = 0; col < 3; ++col)
+    {
+        <p>@cells[row, col]</p>
     }
 }
+
+@code {
+    private int[,] cells = new int[3, 3];
+    
+    private void editCell(int r, int c)
+    {
+        Console.WriteLine($"editCell called: row={r}, col={c}, val={val}");
+
+        if (r >= 0 && r < 3 && c >= 0 && c < 3)
+        {
+            cells[r, c] = val;
+            StateHasChanged();
+        }
+        else
+        {
+            Console.WriteLine($"Invalid position: row={r}, col={c}");
+        }
+    }
+}
+
