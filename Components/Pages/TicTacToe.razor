@@ -1,0 +1,26 @@
+@page "/TicTacToe"
+@rendermode InteractiveServer
+
+<PageTitle>TicTacToe</PageTitle>
+
+<h1>Tic Tac Toe</h1>
+
+<table class="table">
+    <tbody>
+    @for(int row = 0; row < 3; ++row){
+        <tr>
+        @for(int col = 0; col < 3; ++col){
+                <td>@cells[row,col]</td>
+        }
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@code{
+    private int[,] cells = new int[3,3];
+    private void editCell(int row, int col, int val){
+        cells[row,col] = val;
+    }
+}
